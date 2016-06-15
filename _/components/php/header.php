@@ -2,16 +2,16 @@
 	<div class="col-lg-12">
 		<header class="clearfix">
 			<section id="branding">
-				<a href="index.php"><img src="images/misc/ralogo_monogram.png" alt="Logo"></a>
+				<a href="index.php"><img src="images/misc/ralogo_monogram.png" alt="Logo for Roux Conference"></a>
 			</section><!-- branding -->
-			
-			<div class="navbar navbar-fixed">
+
+			<section class="navbar">
 				<ul class="nav navbar-nav">
 					<li><a href="index.php">Home</a></li>
-					<li><a href="venuetravel.php">Venue/ Travel</a></li>
+					<li><a href="venuetravel.php">Venue/Travel</a></li>
 					<li><a href="schedule.php">Schedule</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Artists<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Artists <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li><a tabindex="-1" href="artists.php">All artists</a></li>
 							<li class="divider"></li>
@@ -27,11 +27,11 @@
 						  <li><a tabindex="-1" href="artists.php#Constance_Smith">Constance Smith</a></li>
 						  <li><a tabindex="-1" href="artists.php#Xhou_Ta">Xhou Ta</a></li>
 						  <li><a tabindex="-1" href="artists.php#Richard_Tweed">Richard Tweed</a></li>
-						</ul><!-- dropdown-menu -->
+						</ul><!-- dropdown menu -->
 					</li>
 					<li><a href="register.php">Register</a></li>
 				</ul><!-- nav -->
-			</div><!-- navbar -->
+			</section><!-- navbar -->
 
 		</header><!-- header -->
 	</div><!-- column -->

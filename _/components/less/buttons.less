@@ -6,33 +6,28 @@
 // Base styles
 // --------------------------------------------------
 
+// Core styles
 .btn {
   display: inline-block;
+  padding: @padding-base-vertical @padding-base-horizontal;
   margin-bottom: 0; // For input.btn
-  font-weight: @btn-font-weight;
+  font-size: @font-size-base;
+  font-weight: 500;
+  line-height: @line-height-base;
   text-align: center;
   vertical-align: middle;
-  touch-action: manipulation;
   cursor: pointer;
-  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: 1px solid transparent;
+  border-radius: @border-radius-base;
   white-space: nowrap;
-  .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
-  .user-select(none);
 
-  &,
-  &:active,
-  &.active {
-    &:focus,
-    &.focus {
-      .tab-focus();
-    }
+  &:focus {
+    .tab-focus();
   }
 
   &:hover,
-  &:focus,
-  &.focus {
-    color: @btn-default-color;
+  &:focus {
+    color: #fff;
     text-decoration: none;
   }
 
@@ -46,17 +41,12 @@
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
-    cursor: @cursor-disabled;
+    cursor: default;
+    pointer-events: none; // Future-proof disabling of clicks
     .opacity(.65);
     .box-shadow(none);
   }
 
-  a& {
-    &.disabled,
-    fieldset[disabled] & {
-      pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
-    }
-  }
 }
 
 
@@ -64,26 +54,26 @@
 // --------------------------------------------------
 
 .btn-default {
-  .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+  .btn-pseudo-states(@btn-default-color, @btn-default-bg, @btn-default-border);
 }
 .btn-primary {
-  .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
-}
-// Success appears as green
-.btn-success {
-  .button-variant(@btn-success-color; @btn-success-bg; @btn-success-border);
-}
-// Info appears as blue-green
-.btn-info {
-  .button-variant(@btn-info-color; @btn-info-bg; @btn-info-border);
+  .btn-pseudo-states(@btn-primary-color, @btn-primary-bg, @btn-primary-border);
 }
 // Warning appears as orange
 .btn-warning {
-  .button-variant(@btn-warning-color; @btn-warning-bg; @btn-warning-border);
+  .btn-pseudo-states(@btn-warning-color, @btn-warning-bg, @btn-warning-border);
 }
 // Danger and error appear as red
 .btn-danger {
-  .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
+  .btn-pseudo-states(@btn-danger-color, @btn-danger-bg, @btn-danger-border);
+}
+// Success appears as green
+.btn-success {
+  .btn-pseudo-states(@btn-success-color, @btn-success-bg, @btn-success-border);
+}
+// Info appears as blue-green
+.btn-info {
+  .btn-pseudo-states(@btn-info-color, @btn-info-bg, @btn-info-border);
 }
 
 
@@ -91,36 +81,38 @@
 // -------------------------
 
 // Make a button look and behave like a link
+.btn-link,
+.btn-link:active,
+.btn-link[disabled],
+fieldset[disabled] .btn-link {
+  background-color: transparent;
+  background-image: none;
+  .box-shadow(none);
+}
+.btn-link,
+.btn-link:hover,
+.btn-link:focus,
+.btn-link:active {
+  border-color: transparent;
+}
 .btn-link {
   color: @link-color;
   font-weight: normal;
+  cursor: pointer;
   border-radius: 0;
-
-  &,
-  &:active,
-  &.active,
-  &[disabled],
-  fieldset[disabled] & {
-    background-color: transparent;
-    .box-shadow(none);
-  }
-  &,
-  &:hover,
-  &:focus,
-  &:active {
-    border-color: transparent;
-  }
-  &:hover,
-  &:focus {
-    color: @link-hover-color;
-    text-decoration: @link-hover-decoration;
-    background-color: transparent;
-  }
+}
+.btn-link:hover,
+.btn-link:focus {
+  color: @link-hover-color;
+  text-decoration: underline;
+  background-color: transparent;
+}
+.btn-link {
   &[disabled],
   fieldset[disabled] & {
     &:hover,
     &:focus {
-      color: @btn-link-disabled-color;
+      color: @gray-dark;
       text-decoration: none;
     }
   }
@@ -130,16 +122,16 @@
 // Button Sizes
 // --------------------------------------------------
 
-.btn-lg {
-  // line-height: ensure even-numbered height of button next to large input
-  .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @btn-border-radius-large);
+.btn-large {
+  padding: @padding-large-vertical @padding-large-horizontal;
+  font-size: @font-size-large;
+  border-radius: @border-radius-large;
 }
-.btn-sm {
-  // line-height: ensure proper height of button next to small input
-  .button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
-}
-.btn-xs {
-  .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
+.btn-small {
+  padding: @padding-small-vertical @padding-small-horizontal;
+  font-size: @font-size-small;
+  line-height: 1.5; // ensure proper height of button next to small input
+  border-radius: @border-radius-small;
 }
 
 
@@ -149,6 +141,8 @@
 .btn-block {
   display: block;
   width: 100%;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 // Vertically space out multiple block buttons

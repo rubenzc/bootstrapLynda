@@ -3,82 +3,61 @@
 // --------------------------------------------------
 
 
-// Container widths
-//
-// Set the container width, and override it for fixed navbars in media queries.
-
+// Set the container width, and override it for fixed navbars in media queries
 .container {
   .container-fixed();
-
-  @media (min-width: @screen-sm-min) {
-    width: @container-sm;
-  }
-  @media (min-width: @screen-md-min) {
-    width: @container-md;
-  }
-  @media (min-width: @screen-lg-min) {
-    width: @container-lg;
-  }
 }
 
-
-// Fluid container
-//
-// Utilizes the mixin meant for fixed width containers, but without any defined
-// width for fluid, full width layouts.
-
-.container-fluid {
-  .container-fixed();
-}
-
-
-// Row
-//
-// Rows contain and clear the floats of your columns.
-
+// Mobile-first defaults
 .row {
   .make-row();
 }
 
 
-// Columns
-//
 // Common styles for small and large grid columns
+.col {
+  position: relative;
+  // Float and set width: 100%; for easy stacking on mobile devices
+  float: left;
+  width: 100%;
+  // Prevent columns from collapsing when empty
+  min-height: 1px;
+  // Inner gutter via padding
+  padding-left:  (@grid-gutter-width / 2);
+  padding-right: (@grid-gutter-width / 2);
+}
 
-.make-grid-columns();
+// Generate small grid classes first
+.generate-grid-columns(@grid-columns);
 
-
-// Extra small grid
-//
-// Columns, offsets, pushes, and pulls for extra small devices like
-// smartphones.
-
-.make-grid(xs);
-
-
-// Small grid
-//
-// Columns, offsets, pushes, and pulls for the small device range, from phones
-// to tablets.
-
-@media (min-width: @screen-sm-min) {
-  .make-grid(sm);
+// Then generate the larger grid classes via media query
+@media screen and (min-width: @screen-small) {
+  .generate-large-grid-columns(@grid-columns);
 }
 
 
-// Medium grid
-//
-// Columns, offsets, pushes, and pulls for the desktop device range.
-
-@media (min-width: @screen-md-min) {
-  .make-grid(md);
+// Responsive: Tablets and up
+@media screen and (min-width: @screen-tablet) {
+  .container {
+    max-width: 728px;
+  }
 }
 
-
-// Large grid
-//
-// Columns, offsets, pushes, and pulls for the large desktop device range.
-
-@media (min-width: @screen-lg-min) {
-  .make-grid(lg);
+// Responsive: Desktops and up
+@media screen and (min-width: @screen-desktop) {
+  .container {
+    max-width: 940px;
+  }
 }
+
+// Responsive: Large desktops and up
+@media screen and (min-width: @screen-large-desktop) {
+  .container {
+    max-width: 1170px;
+  }
+}
+
+// Reset utility classes due to specificity
+/*[class*="col-span-"].pull-right {
+  float: right;
+}*/
